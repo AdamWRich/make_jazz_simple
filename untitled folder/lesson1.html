@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/style.css" class="css">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="static/img/favicon_io/site.webmanifest">
+    <script src="https://kit.fontawesome.com/b431e82af0.js" crossorigin="anonymous"></script>
+    <title>Music Theory App</title>
+</head>
+<body class="black_background">
+    <nav class="navbar navbar-expand-lg navbar-light w-100" style="position:absolute; top: 0; background-color: black;">
+        <a class="navbar-brand ms-2" href="#">
+            <img src="static/img/logo.svg" style="height: 40px;" alt="">
+        </a>
+        <button class="navbar-toggler" style="border-color: white;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
+        </button>
+        <!--  -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav w-100 justify-content-between">
+                <div class="d-flex">
+                <li class="nav-item active">
+                    <a class="nav-link text-light" href="user_dash.html">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Lessons</a>
+                </li>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">User Settings <span class="fa-solid fa-gear"></span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mb-5 d-flex flex-column align-items-center text-center" style="height: fit-content; margin-top: 5rem;">
+        <h3 class="text-light">Lesson #1</h3>
+        <h1 class="text-light">How to Build Chords (with extensions!)</h1>
+        <div class="row align-items-center col-10" style="height: fit-content;">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="7" aria-label="Slide 8"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="8" aria-label="Slide 9"></button>
+                    
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active mb-3">
+                        <img src="static/img/lessons/lesson1/pg1.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">This is a chord symbol. Musicians should know how to read these symbols in addition to standard clef notation.</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg2.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Chord symbols can be broken down into 2 parts: the root and extensions/adjustments. Let's first talk about building a triad from the root note.</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg3.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Recall the major scale associated with the root of the chord (i.e. scale degree 1 = the root).</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg4.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Find scale degrees 1, 3, & 5. *Just about all chords are built on intervals (distance between notes) that are a third apart: C to E, D to F, E to G, F to A, etc.</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg5.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Congratulations! You have just built your first chord: a "C Major chord". This chord can be played in any octave (or inversion) and still keep the same name. <span style="font-style: italic;">But what about the extension?</span></p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg6.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Extensions are where things get interesting. Musicians (especially those who play jazz) have come up with shorthands for extensions. These shorthands have come to represent a certain "sound" that a composer/musician wants to produce. Above is the chord symbol for a C Major 7 chord. Take note of the spelling: what scale degree was added?</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg7.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">These next few slides offer examples of other common extensions and adjustments. All extensions apply directly to scale degrees.</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg8.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Yes, we can even make adjustments to scale degrees 3 and 5! Lowering the third by a half-step makes this chord <span style="font-style:italic;">minor</span>.</p>
+                    </div>
+                    <div class="carousel-item mb-3">
+                        <img src="static/img/lessons/lesson1/pg9.png" class="d-block w-100 mb-5" alt="...">
+                        <p class="text-light mb-5">Check out the resources below for even more chord spelling fun!</p>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="container border mb-5" style="height: 400px;">
+        <div class="row border border-primary align-items-center" style="height: 400px;">
+            <div class="col-7 border border-danger" style="height: 100px;"></div>
+            <div class="col-5 border border-success" style="height: 100px;"></div>
+        </div>
+    </div>
+    <div class="container border" style="height: 400px;">
+        <div class="row border border-primary align-items-center" style="height: 400px;">
+            <div class="col-7 border border-danger" style="height: 100px;"></div>
+            <div class="col-5 border border-success" style="height: 100px;"></div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</body>
+</html>
