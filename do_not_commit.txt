@@ -1,0 +1,3 @@
+Virtual Env location:
+
+/Users/adamrich/.local/share/virtualenvs/make_jazz_simple-1sU2S9PJ
