@@ -31,6 +31,22 @@ def register_user():
     session['user_id'] = user_id
     return redirect(f'/dashboard/{user_id}')
 
+@app.route('/login_user', methods=['POST'])
+def login_user():
+    user = User.get_user_by_username(request.form)
+    if not user:
+        flash("Username not found", 'login')
+        return redirect('/')
+    if not bcrypt.check_password_hash(user[0]['password'], request.form['password']):
+        flash("Invalid password", 'login')
+        return redirect('/')
+    session['user_id'] = user[0]['id']
+    current_user_id = session['user_id']
+    return redirect(f'/dashboard/{current_user_id}')
+
 @app.route('/dashboard/<int:id>/')
 def dashboard(id):
-    return render_template('user_dash.html')
+    if session['user_id'] != id:
+        return redirect('/login')
+    current_user = User.get_user_by_id(id)
+    return render_template('user_dash.html', user = current_user)

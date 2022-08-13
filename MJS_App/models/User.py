@@ -2,6 +2,7 @@ from MJS_App.config.mysqlconnection import connectToMYSQL
 from flask import flash
 import re
 from MJS_App import app
+from MJS_App.models import Badge
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -18,6 +19,7 @@ class User:
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
+        self.badges = []
 
     @classmethod
     def save(cls, data):
@@ -26,18 +28,22 @@ class User:
 
 
     @classmethod
-    def get_user_by_email(cls, data):
-        query = "SELECT * FROM users WHERE email = %(email)s;"
+    def get_user_by_username(cls, data):
+        query = "SELECT * FROM users WHERE username = %(username)s;"
         return connectToMYSQL(db).query_db(query, data)
 
     @classmethod
     def get_user_by_id(cls, id):
-        query = "SELECT * FROM users WHERE id = %(id)s;"
+        query = "SELECT * FROM users LEFT JOIN badges ON badges.user_id = users.id WHERE users.id = %(id)s;"
         data = {
             "id":id
         }
         result = connectToMYSQL(db).query_db(query, data)
-        return result[0]
+        current_user = cls(result[0])
+        for row in result:
+            current_user.badges.append(Badge.Badge(row))
+
+        return current_user
 
     @staticmethod
     def verify_user(user):
