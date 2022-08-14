@@ -88,10 +88,12 @@
                 <div class="row">
                     {% for badge in user.badges %}
                         <div class="card col-3  me-2 mb-2">
-                            <img src="/static/img/badges/quiz{{badge['topic']}}_badge.png" class="card-img-top" alt="badge icon">
-                            <div class="card-body">
-                                <h5 class="card-title">Lesson {{badge['topic']}}</h5>
-                                <p class="card-text">Click 'DELETE' to reset your badge.</p>
+                            <img src="/static/img/badges/quiz{{badge['topic']}}_badge.png" class="card-img-top mt-2" alt="badge icon">
+                            <div class="card-body text-center">
+                                <h4 class="card-title">Lesson {{badge['topic']}}</h4>
+                                <h6>score: {{badge['score']}}</h6>
+                                <h6>{{badge['updated_at'].strftime("%m/%d/%Y at %H:%M")}}</h6>
+                                <p class="card-text mt-5">Click 'DELETE' to reset your badge.</p>
                                 <form action="/badge/delete" method="POST">
                                     <input type="hidden" name="user_id" value="{{user.id}}">
                                     <input type="hidden" name="id" value="{{badge.id}}">

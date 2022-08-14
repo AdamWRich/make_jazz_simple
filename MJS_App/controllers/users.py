@@ -23,7 +23,7 @@ def register_user():
         "password" : request.form['pass'],
         "confirm_password":request.form['confirm_pass']
     }
-    if not User.verify_user(data, 'registration'):
+    if not User.verify_user(data):
         return redirect('/register')
     data['password'] = bcrypt.generate_password_hash(request.form['pass'])
     data.pop('confirm_password')
@@ -63,7 +63,7 @@ def update_user():
         "username" : request.form['username'],
     }
     
-    if not User.verify_user(data, 'update'):
+    if not User.verify_update_user(data):
         return redirect(f"/user/{session['user_id']}/settings")
     User.update_user(data)
     return redirect(f"/dashboard/{session['user_id']}")

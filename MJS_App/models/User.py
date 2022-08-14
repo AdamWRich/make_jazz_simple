@@ -54,43 +54,68 @@ class User:
 
 
     @staticmethod
-    def verify_user(user, usage):
-        use = usage
+    def verify_user(user):
         is_valid = True
         if user['fname'] and len(user['fname'])<2 :
-            flash(f"First name must be at least 3 characters!", '{use}')
+            flash(f"First name must be at least 3 characters!", 'registration')
             print("line 31")
             is_valid = False
         if " " in user['fname'] or " " in user['lname']:
-            flash(f"Please insert names without spaces!", '{use}')
+            flash(f"Please insert names without spaces!", 'registration')
             is_valid = False
         if user['fname'].isalpha() == False:
-            flash(f"Please insert names without numbers!", '{use}')
+            flash(f"Please insert names without numbers!", 'registration')
         if user['lname'].isalpha() == False:
-            flash(f"Please insert names without numbers!", '{use}')
+            flash(f"Please insert names without numbers!", 'registration')
         if user['lname'] and len(user['lname'])<2:
-            flash(f"Last name must be at least 3 characters!", '{use}')
+            flash(f"Last name must be at least 3 characters!", 'registration')
             is_valid = False
-        if 'password' not in list(user.keys()):
-            return is_valid
+        # if usage == 'update':
+        #     if 'password' not in list(user.keys()):
+        #         return is_valid
         if user['email'] == "":
-            flash(f"Please insert an email!", '{use}')
+            flash(f"Please insert an email!", 'registration')
             is_valid = False
         if not EMAIL_REGEX.match(user['email']) or " " in user['email']:
-            flash(f"Invalid email address!", '{use}')
+            flash(f"Invalid email address!", 'registration')
             is_valid = False
         query = "SELECT * FROM users WHERE email = %(email)s;"
         results = connectToMYSQL(db).query_db(query, user)        
         if len(results) >= 1:
-            flash(f"Email already taken.", '{use}')
+            flash(f"Email already taken.", 'registration')
             print("line 49")
             is_valid = False
         if len(user['password']) < 8:
-            flash(f"Password must be 8 characters!", '{use}')
+            flash(f"Password must be 8 characters!", 'registration')
             print("line 53")
             is_valid = False
         if user['password'] != user['confirm_password']:
-            flash(f"Passwords must match!", '{use}')
+            flash(f"Passwords must match!", 'registration')
             print("line 57")
+            is_valid = False
+        return is_valid
+
+    @staticmethod
+    def verify_update_user(user):
+        is_valid = True
+        if user['fname'] and len(user['fname'])<2 :
+            flash(f"First name must be at least 3 characters!", 'update')
+            print("line 31")
+            is_valid = False
+        if " " in user['fname'] or " " in user['lname']:
+            flash(f"Please insert names without spaces!", 'update')
+            is_valid = False
+        if user['fname'].isalpha() == False:
+            flash(f"Please insert names without numbers!", 'update')
+        if user['lname'].isalpha() == False:
+            flash(f"Please insert names without numbers!", 'update')
+        if user['lname'] and len(user['lname'])<2:
+            flash(f"Last name must be at least 3 characters!", 'update')
+            is_valid = False
+        if user['email'] == "":
+            flash(f"Please insert an email!", 'update')
+            is_valid = False
+        if not EMAIL_REGEX.match(user['email']) or " " in user['email']:
+            flash(f"Invalid email address!", 'update')
             is_valid = False
         return is_valid
