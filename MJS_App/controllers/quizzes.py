@@ -5,30 +5,40 @@ from MJS_App.models import QuizCheck, Badge, User
 @app.route('/quiz/grade', methods=['POST'])
 def grade_quiz():
     user_answers = [
-        request.form['q1'], 
-        request.form['q2'], 
-        request.form['q3'], 
-        request.form['q4'], 
-        request.form['q5']
+        request.form['q1'],
+        [request.form['q2']],
+        request.form['q3'],
+        request.form['q4'],
+        [request.form['q5']]
     ]
     results = {
-        'topic': request.form['topic'],
-        'grade': QuizCheck.grade(user_answers),
-        'user_id':session['user_id']
+        'topic': QuizCheck.find_topic(request.form['topic']),
+        'score': QuizCheck.grade(user_answers),
+        'user_id':session['user_id'],
+        'id': None
     }
-    if results['grade'] >= 4 :
-        Badge.award_badge(results)
-        session['results'] = results
-    return redirect('/quiz/results')
-
-@app.route('/quiz/results/')
-def quiz_results():
-    session['results'] = {
-        'topic': "Building Chords and extensions",
-        'grade':0
-    }
-    if session['results']['grade'] < 4:
-        theme = "fail"
+    if results['score'] >= 4 :
+        user = User.User.get_user_by_id(request.form['user_id'])
+        for badge in user.badges:
+            results['id'] = badge.id
+            print(badge.topic)
+            if QuizCheck.find_topic(badge.topic) == results['topic']:
+                updated_badge_id = Badge.Badge.update_badge(results)
+                return redirect(f'/quiz/results/{badge.id}')
+        badge_id = Badge.Badge.award_badge(results)
+        return redirect(f'/quiz/results/{badge_id}')
     else:
-        theme = "pass"
-    return render_template("quiz_results.html", theme = theme, grade = session['results']['grade'], topic = session['results']['topic'])
+        score = results['score']
+        return redirect(f"/quiz/results/{request.form['topic']}/{score*35}")
+
+
+@app.route('/quiz/results/<int:badge_id>')
+def passed_quiz_results(badge_id):
+    badge = Badge.Badge.get_badge_by_id(badge_id)[0]
+    print(badge)
+    return render_template("quiz_results.html", theme = "pass", badge = badge, score = badge['score'])
+
+@app.route('/quiz/results/<int:topic>/<int:adj_score>')
+def failed_quiz_results(topic, adj_score):
+    score = int(adj_score / 35)
+    return render_template("quiz_results.html", theme = "fail", score = score, topic = QuizCheck.find_topic(topic))

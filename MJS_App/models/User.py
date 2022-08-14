@@ -12,6 +12,7 @@ db = "make_jazz_simple"
 
 class User:
     def __init__(self, data):
+        self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
         self.email = data['email']
@@ -40,8 +41,9 @@ class User:
         }
         result = connectToMYSQL(db).query_db(query, data)
         current_user = cls(result[0])
-        for row in result:
-            current_user.badges.append(Badge.Badge(row))
+        if result[0]['topic']: 
+            for row in result:
+                current_user.badges.append(Badge.Badge(row))
 
         return current_user
 

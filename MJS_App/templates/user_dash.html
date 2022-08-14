@@ -34,7 +34,7 @@
                 </li>
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link text-light" href="#">User Settings <span class="fa-solid fa-gear"></span></a>
+                    <a class="nav-link text-light" href="/user/{{user.id}}/settings">User Settings <span class="fa-solid fa-gear"></span></a>
                 </li>
             </ul>
         </div>
@@ -52,6 +52,7 @@
                 <h1 class="text-light">
                     LEARNING
                 </h1>
+                <p class="text-light">All your earned badges will appear here!</p>
             </div>
             <div class="row mb-2">
                 <div class="accordion" id="accordionExample">
@@ -62,9 +63,14 @@
                         </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <p><strong>Description</strong> More text</p>
+                            <div class="accordion-body d-flex justify-content-between">
+                                <div>
+                                <p><strong>Building Chords and extensions</strong></p>
+                                <p>The building blocks of jazz: chords! In this beginners module, you will learn how to spell the most common chords. Don't forget to bring your instrument!</p>
+                                </div>
+                                <div>
                                 <a class="btn btn-primary" href="/lesson1">Learn</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,8 +81,14 @@
                         </button>
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <div class="accordion-body d-flex justify-content-between">
+                                <div>
+                                    <p><strong>Chord Progressions</strong></p>
+                                    <p>The <i>'sound'</i> is what this module is all about. Dive in to learning what makes jazz sound like jazz: the order of chords!</p>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary disabled" href="#">Learn</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -87,8 +99,14 @@
                         </button>
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <div class="accordion-body d-flex justify-content-between">
+                                <div>
+                                    <p><strong>Melodies</strong></p>
+                                    <p>What makes a good sounding melody? In this module, learn how the masters wrote their greatest tunes.</p>
+                                </div>
+                                <div>
+                                    <a class="btn btn-primary disabled" href="#">Learn</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -98,23 +116,14 @@
         <div id="right_container" class="col-md p-2">
             <div class="text-end pe-5">
                 <h1 class="text-light">BADGES</h1>
+                <p class="text-light">All your earned badges will appear here!</p>
             </div>
-            <div class="row">
-                <div class="col-4 text-center">
-                    <span class="text-warning" style="font-size: 5rem;">
-                        <i class="fa-solid fa-music"></i>
-                    </span>
-                </div>
-                <div class="col-4 text-center">
-                    <span class="text-danger" style="font-size: 5rem;">
-                        <i class="fa-solid fa-drum"></i>
-                    </span>
-                </div>
-                <div class="col-4 text-center ">
-                    <span class="text-light" style="font-size: 5rem;">
-                        <i class="fa-solid fa-music"></i>
-                    </span>
-                </div>
+            <div class="row justify-content-end">
+                {% for badge in user.badges %}
+                    <div class="col-4 text-center">
+                        <img src="/static/img/badges/quiz{{badge['topic']}}_badge.png" alt="" style="width: 5rem;">
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

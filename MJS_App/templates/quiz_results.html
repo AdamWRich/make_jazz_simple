@@ -56,14 +56,18 @@
         <div class="row" style="height: 400px;">
             <div class="col-12 text-center" style="height: 100px;">
                 {% if theme == 'pass' %}
-                <h3 class="text-light">You passed the {{topic}} quiz!</h3>
+                <h3 class="text-light">You passed the {{badge.topic}} quiz!</h3>
                 {% else %}
                 <h3 class="text-light">Try again! You did not pass the {{topic}} quiz.....</h3>
                 {% endif %}
-                <h3 class="text-light fw-1">Your score: {{grade}}/5</h3>
-                <!-- badge icon -->
-                <!-- blurb about badge displaying on dashboard -->
-                <a class="btn btn-light mt-3 me-3">To Dashboard <span class="fa-solid fa-user-graduate"></span></a>
+                <h3 class="text-light fw-1">Your score: {{score}}/5</h3>
+                {% if theme == 'pass' %}
+                <p class="text-light mt-2">Your badge will display on your dashboard!</p>
+                    <div class="row d-flex justify-content-center">
+                        <img src="/static/img/badges/quiz1_badge.png" alt="quiz 1 badge" style="width: 200px;">
+                    </div>
+                {% endif %}
+                <a class="btn btn-light mt-3 me-3" href="/dashboard/{{session['user_id']}}">To Dashboard <span class="fa-solid fa-user-graduate"></span></a>
                 <a class="btn btn-primary mt-3 disabled">Share! <span class="fa-solid fa-bullhorn"></span></a>
             </div>
         </div>

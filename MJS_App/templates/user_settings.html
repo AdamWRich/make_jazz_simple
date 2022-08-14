@@ -15,7 +15,7 @@
 <body class="black_background">
     <nav class="navbar navbar-expand-lg navbar-light w-100" style="position:absolute; top: 0; background-color: black;">
         <a class="navbar-brand ms-2" href="#">
-            <img src="static/img/logo.svg" style="height: 40px;" alt="">
+            <img src="/static/img/logo.svg" style="height: 40px;" alt="">
         </a>
         <button class="navbar-toggler" style="border-color: white;" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color:#fff; font-size:28px;"></i></span>
@@ -25,15 +25,13 @@
             <ul class="navbar-nav w-100 justify-content-between">
                 <div class="d-flex">
                 <li class="nav-item active">
-                    <a class="nav-link text-light" href="user_dash.html">Dashboard <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-light" href="/dashboard/{{user.id}}">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-light" href="#">Lessons</a>
                 </li>
                 </div>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">User Settings <span class="fa-solid fa-gear"></span></a>
-                </li>
+                
             </ul>
         </div>
     </nav>
@@ -43,7 +41,7 @@
                 <h2 class="text-light">User Settings and Info</h2>
             </div>
             <div class="col-4">
-                <h1>{username}</h1>
+                <h1 class="text-light">{{user.username}}</h1>
             </div>
         </div>
     </div>
@@ -70,30 +68,20 @@
             <div class="col-8">
                 <h3 class="text-light">Learning History and Badges:</h3>
                 <div class="row">
-                    <div class="card col-3  me-2 mb-2">
-                        <img src="#" class="card-img-top" alt="badge icon">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                    {% for badge in user.badges %}
+                        <div class="card col-3  me-2 mb-2">
+                            <img src="/static/img/badges/quiz{{badge['topic']}}_badge.png" class="card-img-top" alt="badge icon">
+                            <div class="card-body">
+                                <h5 class="card-title">Lesson {{badge['topic']}}</h5>
+                                <p class="card-text">Click 'DELETE' to reset your badge.</p>
+                                <form action="/badge/delete" method="POST">
+                                    <input type="hidden" name="user_id" value="{{user.id}}">
+                                    <input type="hidden" name="id" value="{{badge.id}}">
+                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card col-3 me-2 mb-2">
-                        <img src="#" class="card-img-top" alt="badge icon">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card col-3 me-2 mb-2">
-                        <img src="#" class="card-img-top" alt="badge icon">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

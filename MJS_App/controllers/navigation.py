@@ -10,3 +10,8 @@ def lesson1():
 @app.route('/quiz1')
 def quiz1():
     return render_template("quiz1.html")
+
+@app.route('/user/<int:id>/settings')
+def user_settings(id):
+    current_user = User.get_user_by_id(id)
+    return render_template('user_settings.html', user = current_user)

@@ -1,5 +1,5 @@
 from MJS_App import app
-from MJS_App.controllers import users, navigation, quizzes
+from MJS_App.controllers import users, navigation, quizzes, badges
 
 
 

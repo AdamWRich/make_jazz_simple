@@ -12,8 +12,16 @@ import mingus.core.chords as chords
 # Altered chords: ‘7b5’, ‘7b9’, ‘7#9’, ‘67’ or ‘6/7’
 # Special: ‘5’, ‘NC’, ‘hendrix’
 topics = {
-    '1':'Building Chords with extensions'
+    '1':'Building Chords and extensions'
 }
+
+def find_topic(input):
+    try:
+        return topics[f'{input}']
+    except KeyError:
+        return list(topics.keys())[list(topics.values()).index(f'{input}')]
+
+
 
 quiz_1 = {
     'q1':chords.triads("F")[0],
@@ -22,6 +30,9 @@ quiz_1 = {
     'q4':chords.from_shorthand("D7b9"),
     'q5':chords.determine(["G", "B", "D", "F", "A#"])
 }
+
+
+
 def quiz_1_answers(q):
     return quiz_1[f"q{q}"]
 
@@ -29,9 +40,9 @@ def grade(user_answers):
     grade = 0
     q = 1
     for answer in user_answers:
-        if answer == quiz_1_answers(q):
+        if str(answer) == str(quiz_1_answers(q)):
             grade += 1
+        print(f"User answer: {answer}, correct answer: {quiz_1_answers(q)}")
         q += 1
+    print(grade)
     return grade
-
-
