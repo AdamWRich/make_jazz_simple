@@ -34,11 +34,15 @@ def grade_quiz():
 
 @app.route('/quiz/results/<int:badge_id>')
 def passed_quiz_results(badge_id):
+    if 'user_id' not in session:
+        return redirect('/logout')
     badge = Badge.Badge.get_badge_by_id(badge_id)[0]
     print(badge)
     return render_template("quiz_results.html", theme = "pass", badge = badge, score = badge['score'])
 
 @app.route('/quiz/results/<int:topic>/<int:adj_score>')
 def failed_quiz_results(topic, adj_score):
+    if 'user_id' not in session:
+        return redirect('/logout')
     score = int(adj_score / 35)
     return render_template("quiz_results.html", theme = "fail", score = score, topic = QuizCheck.find_topic(topic))

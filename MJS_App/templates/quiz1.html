@@ -26,16 +26,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav w-100 justify-content-between">
                 <div class="d-flex">
-                <li class="nav-item active">
-                    <a class="nav-link text-light" href="user_dash.html">Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Lessons</a>
-                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-light text-underline-hover" href="/dashboard/{{session['user_id']}}">Dashboard <span class="sr-only">(current)</span></a>
+                    </li>
                 </div>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">User Settings <span class="fa-solid fa-gear"></span></a>
-                </li>
+                <div class="d-flex">
+                    <li class="nav-item">
+                        <a class="nav-link text-light text-underline-hover" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bg-light btn btn-outline-light" href="/user/{{session['user_id']}}/settings">User Settings <span class="fa-solid fa-gear"></span></a>
+                    </li>
+                </div>
             </ul>
         </div>
     </nav>

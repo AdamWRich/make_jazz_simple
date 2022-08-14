@@ -19,6 +19,15 @@
     </div>
     <div class="container-md mt-lg-5 text-center" style="height: 500px;">
         <h2 class="text-light">Log In</h2>
+        {% with messages = get_flashed_messages(category_filter=['login']) %}
+                {% if messages %}
+                <div class="bg-danger">
+                    {% for message in messages %}
+                    <p class="validation">{{message}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+        {% endwith %}
         <div class="d-flex justify-content-center">
                 <form class="mt-5  mb-5 col-3" action="/login_user" method="POST">
                     <div class="form-group mb-3">

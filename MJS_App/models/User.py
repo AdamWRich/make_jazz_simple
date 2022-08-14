@@ -46,42 +46,51 @@ class User:
                 current_user.badges.append(Badge.Badge(row))
 
         return current_user
+    
+    @classmethod
+    def update_user(cls, data):
+        query = "UPDATE users SET first_name = %(fname)s, last_name = %(lname)s, email = %(email)s, username = %(username)s WHERE id = %(id)s;"
+        return connectToMYSQL(db).query_db(query, data)
+
 
     @staticmethod
-    def verify_user(user):
+    def verify_user(user, usage):
+        use = usage
         is_valid = True
         if user['fname'] and len(user['fname'])<2 :
-            flash("First name must be at least 3 characters!", 'registration')
+            flash(f"First name must be at least 3 characters!", '{use}')
             print("line 31")
             is_valid = False
         if " " in user['fname'] or " " in user['lname']:
-            flash("Please insert names without spaces!", 'registration')
+            flash(f"Please insert names without spaces!", '{use}')
             is_valid = False
         if user['fname'].isalpha() == False:
-            flash("Please insert names without numbers!", 'registration')
+            flash(f"Please insert names without numbers!", '{use}')
         if user['lname'].isalpha() == False:
-            flash("Please insert names without numbers!", 'registration')
+            flash(f"Please insert names without numbers!", '{use}')
         if user['lname'] and len(user['lname'])<2:
-            flash("Last name must be at least 3 characters!", 'registration')
+            flash(f"Last name must be at least 3 characters!", '{use}')
             is_valid = False
+        if 'password' not in list(user.keys()):
+            return is_valid
         if user['email'] == "":
-            flash("Please insert an email!", 'registration')
+            flash(f"Please insert an email!", '{use}')
             is_valid = False
         if not EMAIL_REGEX.match(user['email']) or " " in user['email']:
-            flash("Invalid email address!", 'registration')
+            flash(f"Invalid email address!", '{use}')
             is_valid = False
         query = "SELECT * FROM users WHERE email = %(email)s;"
-        results = connectToMYSQL(db).query_db(query, user)
+        results = connectToMYSQL(db).query_db(query, user)        
         if len(results) >= 1:
-            flash("Email already taken.", 'registration')
+            flash(f"Email already taken.", '{use}')
             print("line 49")
             is_valid = False
         if len(user['password']) < 8:
-            flash("Password must be 8 characters!", 'registration')
+            flash(f"Password must be 8 characters!", '{use}')
             print("line 53")
             is_valid = False
         if user['password'] != user['confirm_password']:
-            flash("Passwords must match!", 'registration')
+            flash(f"Passwords must match!", '{use}')
             print("line 57")
             is_valid = False
         return is_valid

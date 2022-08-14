@@ -24,14 +24,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav w-100 justify-content-between">
                 <div class="d-flex">
-                <li class="nav-item active">
-                    <a class="nav-link text-light" href="/dashboard/{{user.id}}">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="#">Lessons</a>
-                </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-light text-underline-hover" href="/dashboard/{{session['user_id']}}">Dashboard </a>
+                    </li>
                 </div>
-                
+                <div class="d-flex">
+                    <li class="nav-item">
+                        <a class="nav-link text-light text-underline-hover" href="/logout">Logout</a>
+                    </li>
+                </div>
             </ul>
         </div>
     </nav>
@@ -48,18 +49,35 @@
     <div class="container">
         <div class="row pt-2">
             <div class="col-4">
-                <form  class="col-8 "action="POST">
+                <form  class="col-8" method="POST" action="/user/update">
+                    <input type="hidden" value="{{session['user_id']}}" name="id">
+                    {% with messages = get_flashed_messages(category_filter=['update']) %}
+                    {% if messages %}
+                    <div class="bg-danger text-center">
+                        {% for message in messages %}
+                        <p class="validation">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
                     <div class="form-group mb-3">
                         <label class="text-light" for="fname">First Name</label>
-                        <input type="input" class="form-control bg-transparent border border-1 p-2 text-light" name="fname" placeholder="John">
+                        <input type="input" class="form-control bg-transparent border border-1 p-2 text-light" name="fname" value="{{user.first_name}}">
                     </div>
                     <div class="form-group mb-3">
                         <label class="text-light" for="lname">Last Name</label>
-                        <input type="input" class="form-control bg-transparent border border-1 p-2 text-light" name="fname" placeholder="Doe">
+                        <input type="input" class="form-control bg-transparent border border-1 p-2 text-light" name="lname" value="{{user.last_name}}"">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class ="text-light" for="username">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text">@</span>
+                                <input type="text" class="form-control bg-transparent border border-1 p-2 text-light" name="username" value="{{user.username}}" required>
+                            </div>
                     </div>
                     <div class="form-group mb-3">
                         <label class="text-light" for="email">Email address</label>
-                        <input type="email" disabled=true class="form-control bg-transparent border border-1 p-2 text-light" name="email" placeholder="johndoe2@yahoo.com">
+                        <input type="email" class="form-control bg-transparent border border-1 p-2 text-light" name="email" value="{{user.email}}">
                     </div>
                     
                     <button type="submit" class="mt-2 btn btn-primary">Update</button>

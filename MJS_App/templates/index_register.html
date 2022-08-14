@@ -35,6 +35,15 @@
                         <p class="text-light">Already registered? <a href="/login">Log in Here</a></p>
                     </div>
                 </div>
+                {% with messages = get_flashed_messages(category_filter=['registration']) %}
+                    {% if messages %}
+                    <div class="bg-danger text-center">
+                        {% for message in messages %}
+                        <p class="validation">{{message}}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                {% endwith %}
                 <div style="display:flex; justify-content: center;" class="mb-5">
                     <form action='/register/user' method="POST">
                         <div class="form-group mb-3">
